@@ -8,6 +8,8 @@ using UnityEngine;
 public sealed class TileArena : MonoBehaviour
 {
     [Header("Scene References")]
+    [Tooltip("Handles the drawing of path objects.")]
+    [SerializeField] private PathRenderer pathRenderer = null;
     [Tooltip("Object to duplicate at the wall coordinates.")]
     [SerializeField] private GameObject wallPrefab = null;
     [Header("Arena Attributes")]
@@ -202,5 +204,17 @@ public sealed class TileArena : MonoBehaviour
         }
         // Notify listeners of the layout change.
         OnLayoutChange?.Invoke();
+    }
+
+    // TODO: Add the possibility to draw multiple paths.
+    // Right now this just routes to the one existing
+    // path.
+    public void DrawPath(Vector2Int[] path)
+    {
+        pathRenderer.DrawPath(path);
+    }
+    public void ClearPath()
+    {
+        pathRenderer.ClearPath();
     }
 }
